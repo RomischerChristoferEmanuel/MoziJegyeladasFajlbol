@@ -13,3 +13,9 @@ foreach (string beolvasott in File.ReadAllLines("filmek.txt").Skip(1))
 
 
 }
+Console.WriteLine("========================================");
+Console.WriteLine("Vetített filmek és bevételek:");
+foreach(Film aktualis in filmek)
+{
+    Console.WriteLine($"\t- {aktualis.Cim}: {aktualis.EladottJegyek} db jegy -> Bevétel: {aktualis.JegyAr*aktualis.EladottJegyek} Ft");
+}
