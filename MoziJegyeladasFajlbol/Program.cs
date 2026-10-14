@@ -2,7 +2,7 @@
 
 List<Film>filmek=new List<Film>();
 
-foreach (string beolvasott in File.ReadAllLines("filmek.txt").Skip(1))
+foreach (string beolvasott in File.ReadAllLines("filmek.txt.txt").Skip(1))
 {
     string[] vagas = beolvasott.Split(";");
     Film aktualis=new Film();
@@ -15,7 +15,15 @@ foreach (string beolvasott in File.ReadAllLines("filmek.txt").Skip(1))
 }
 Console.WriteLine("========================================");
 Console.WriteLine("Vetített filmek és bevételek:");
-foreach(Film aktualis in filmek)
+int osszesen = 0;
+foreach (Film aktualis in filmek)
 {
     Console.WriteLine($"\t- {aktualis.Cim}: {aktualis.EladottJegyek} db jegy -> Bevétel: {aktualis.JegyAr*aktualis.EladottJegyek} Ft");
+    osszesen += aktualis.EladottJegyek;
 }
+
+//int osszesen2= filmek.Sum(a=>a.EladottJegyek);
+Console.WriteLine($"Összes eladott jegy: {osszesen} db");
+
+Console.WriteLine($"Összes napi jegybevétel: {filmek.Sum(a=>a.EladottJegyek*a.JegyAr)} Ft");
+Console.WriteLine($"Átlagos eladott jegyszám/film: {filmek.Average(a=>a.EladottJegyek):F0} db");
